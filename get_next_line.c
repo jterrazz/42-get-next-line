@@ -6,7 +6,7 @@
 /*   By: jterrazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 21:32:14 by jterrazz          #+#    #+#             */
-/*   Updated: 2017/05/08 15:25:53 by jterrazz         ###   ########.fr       */
+/*   Updated: 2017/05/08 15:46:39 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		join_line(char *str, char **line)
 
 	if (*line)
 	{
-		ft_putstr("wefwefwef");
 		line_sav = *line;
 		*line = ft_strjoin(*line, str);
 		free(line_sav);
@@ -40,8 +39,10 @@ int		cpy_buffer(t_buff *buff, char **line)
 	int i;
 	char *str;
 	char *line_sav;
+	int ret;
 
 	i = 0;
+	ret = 0;
 	str = ft_strnew(buff->buff_size);
 	while (i < buff->buff_size)
 	{
@@ -49,13 +50,14 @@ int		cpy_buffer(t_buff *buff, char **line)
 		{
 			ft_memmove(buff->buff, buff->buff + i, BUFF_SIZE - i);
 			buff->buff_size = BUFF_SIZE - i;
-			join_line(str, line);
-			return (1);
+			ret = 1;
+			break ;
 		}
 		str[i] = buff->buff[i];
 		i++;
 	}
-	return (0);
+	join_line(str, line);
+	return (ret);
 }
 
 int		get_next_line(const int fd, char **line)
