@@ -6,7 +6,7 @@
 /*   By: jterrazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 21:32:22 by jterrazz          #+#    #+#             */
-/*   Updated: 2017/05/09 16:23:30 by jterrazz         ###   ########.fr       */
+/*   Updated: 2017/05/09 17:22:15 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@
 # include "libft/libft.h"
 # include <stdlib.h>
 
-int				get_next_line(const int fd, char **line);
 typedef struct	s_buff
 {
+	int		fd;
 	int		buff_size;
 	char	buff[BUFF_SIZE];
+	struct	s_buff *next;
 }				t_buff;
+
+int				get_next_line(const int fd, char **line);
 
 #endif
