@@ -6,18 +6,17 @@
 /*   By: jterrazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 21:32:22 by jterrazz          #+#    #+#             */
-/*   Updated: 2017/05/10 16:17:10 by jterrazz         ###   ########.fr       */
+/*   Updated: 2017/05/10 16:47:07 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 3
 # include <unistd.h>
-# include <fcntl.h>
-# include "libft/libft.h"
 # include <stdlib.h>
+# include "libft/libft.h"
 
 typedef struct	s_buff
 {
