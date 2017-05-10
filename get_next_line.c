@@ -6,7 +6,7 @@
 /*   By: jterrazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 21:32:14 by jterrazz          #+#    #+#             */
-/*   Updated: 2017/05/09 17:33:45 by jterrazz         ###   ########.fr       */
+/*   Updated: 2017/05/10 16:10:35 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,48 +86,30 @@ int		get_line(t_buff *buff, const int fd, char **line)
 	}
 	return (1);
 }
-//ajouter statics
+
 int		get_next_line(const int fd, char **line)
 {
-	static t_buff		*first_fd;
-	t_buff				*temp_fd;
-	t_buff				*new_fd;
+	static t_list_fd		*first_fd;
+	t_list_fd			*temp_fd;
+	t_list_fd			*new_fd;
+	t_buff				*buff;
 
-	// si pas trouve
 	temp_fd = first_fd;
-	while (temp_fd)
-	{
-		if (temp_fd->fd == fd)
-			return (get_line(temp_fd, fd, line));
-	}
-	new_fd = (t_buff *)malloc(sizeof(t_buff));
-	new_fd->fd = fd;
-	new_fd->next = NULL;
-	if (first_fd)
-		temp_fd->next = new_fd;
+	while (temp_fd && temp_fd->next && temp_fd->fd != fd)
+		temp_fd = temp_fd->next;
+	if (temp_fd && temp_fd->fd == fd)
+		return (get_line(temp_fd->buff, fd, line));
 	else
-		first_fd = new_fd;
-	return (get_line(new_fd, fd, line));
-}
-
-// DELETE AT END !!!
-int 	main(int argc, char **argv)
-{
-	char *line;
-	int fd;
-	int	ret;
-	ret = 111;
-	if (argc == 1)
-		fd = 0;
-	else if (argc == 2)
-		fd = open(argv[1], O_RDONLY);
-	while (ret > 0)
 	{
-		ret = get_next_line(fd, &line);
-		printf("%s\n", line);
-		printf("line -> %s\n", line);
-		printf("ret  -> %d\n", ret);
-printf("\n\n");
+		new_fd = (t_list_fd *)ft_memalloc(sizeof(t_list_fd)); // proteger
+		new_fd->fd = fd;
+		new_fd->next = NULL;
+		buff = (t_buff *)ft_memalloc(sizeof(t_buff)); //prot
+		new_fd->buff = buff;
+		if (first_fd)
+			temp_fd->next = new_fd;
+		else
+			first_fd = new_fd;
+		return (get_line(new_fd->buff, fd, line));
 	}
-	return (0);
 }
