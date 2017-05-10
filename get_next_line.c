@@ -6,7 +6,7 @@
 /*   By: jterrazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 21:32:14 by jterrazz          #+#    #+#             */
-/*   Updated: 2017/05/10 16:10:35 by jterrazz         ###   ########.fr       */
+/*   Updated: 2017/05/10 16:16:34 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		get_line(t_buff *buff, const int fd, char **line)
 
 int		get_next_line(const int fd, char **line)
 {
-	static t_list_fd		*first_fd;
+	static t_list_fd	*first_fd;
 	t_list_fd			*temp_fd;
 	t_list_fd			*new_fd;
 	t_buff				*buff;
@@ -101,10 +101,12 @@ int		get_next_line(const int fd, char **line)
 		return (get_line(temp_fd->buff, fd, line));
 	else
 	{
-		new_fd = (t_list_fd *)ft_memalloc(sizeof(t_list_fd)); // proteger
+		if ((new_fd = (t_list_fd *)ft_memalloc(sizeof(t_list_fd))) == NULL)
+			return (-1);
 		new_fd->fd = fd;
 		new_fd->next = NULL;
-		buff = (t_buff *)ft_memalloc(sizeof(t_buff)); //prot
+		if ((buff = (t_buff *)ft_memalloc(sizeof(t_buff))) == NULL)
+			return (-1);
 		new_fd->buff = buff;
 		if (first_fd)
 			temp_fd->next = new_fd;
