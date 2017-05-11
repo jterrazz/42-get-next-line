@@ -6,12 +6,11 @@
 /*   By: jterrazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 21:32:14 by jterrazz          #+#    #+#             */
-/*   Updated: 2017/05/10 16:16:34 by jterrazz         ###   ########.fr       */
+/*   Updated: 2017/05/11 12:21:06 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 int		join_line(char *str, char **line)
 {
